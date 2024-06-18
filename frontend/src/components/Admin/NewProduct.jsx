@@ -10,6 +10,7 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import StorageIcon from "@mui/icons-material/Storage";
 import SpellcheckIcon from "@mui/icons-material/Spellcheck";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import { professional } from "../../../data/professional";
 
 import SideBar from "./Sidebar";
 import { useNavigate } from "react-router";
@@ -20,10 +21,13 @@ const NewProduct = () => {
   const navigateTo = useNavigate();
   const alert = useAlert();
 
+  console.log("this is professional", professional);
   const { loading, error, success } = useSelector((state) => state.newProduct);
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
+  const [professionalPrice, setProfessionalPrice] = useState([]);
+  const [professionalDesc, setProfessionalDesc] = useState([]);
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [Stock, setStock] = useState(0);
@@ -31,20 +35,10 @@ const NewProduct = () => {
   const [imagesPreview, setImagesPreview] = useState([]);
 
   const categories = [
-    "Events and Management",
-    "Membership",
-    "Bulk Orders",
-    "Travel Tourism",
     "Professional Services",
-    "Booking and Appointment",
-    "Emergency",
     "Home Services/Appliances",
-    "Financial Services/Insurance",
-    "Marketing /Sales Promotion",
-    "Daily Service / Subscription",
-    "Delivery/Pickup",
     "Gift/Hampers",
-    "Documents/Government Services"
+    "Make Website"
   ];
 
   useEffect(() => {
@@ -66,6 +60,8 @@ const NewProduct = () => {
     const myForm = new FormData();
 
     myForm.set("name", name);
+    myForm.set("professionalPrice", JSON.stringify(professionalPrice));
+    myForm.set("professionalDesc", JSON.stringify(professionalDesc));
     myForm.set("price", price);
     myForm.set("description", description);
     myForm.set("category", category);
@@ -123,12 +119,13 @@ const NewProduct = () => {
               <AttachMoneyIcon />
               <input
                 type="number"
-                placeholder="Price"
+                placeholder="Product Price"
                 required
+                value={price}
+                min={0}
                 onChange={(e) => setPrice(e.target.value)}
               />
             </div>
-
             <div>
               <DescriptionIcon />
 
@@ -140,6 +137,9 @@ const NewProduct = () => {
                 rows="1"
               ></textarea>
             </div>
+            
+
+
 
             <div>
               <AccountTreeIcon />
@@ -152,6 +152,99 @@ const NewProduct = () => {
                 ))}
               </select>
             </div>
+
+
+
+            {professional &&
+              professional.map((i, index) => {
+                if(i.category === category){
+                  return(
+                    <>
+                    <div key={index}>
+                      <AttachMoneyIcon />
+                      <input
+                        type="number"
+                        placeholder={`${i.name} price`}
+                        required
+                        min={0}
+                        onChange={(e) =>
+                          setProfessionalPrice((prev) => {
+                            console.log(prev);
+                            // Find the index of the item with the matching id
+                            const itemIndex = prev.findIndex(
+                              (item) => item.id === i.id
+                            );
+  
+                            // Update the price if the item exists, otherwise add a new item
+                            if (itemIndex !== -1) {
+                              // Update the price at the found index
+                              const updatedPrices = [...prev];
+                              updatedPrices[itemIndex] = {
+                                ...updatedPrices[itemIndex],
+                                price: e.target.value,
+                              };
+                              return updatedPrices;
+                            } else {
+                              // Add a new item if the item does not exist
+                              return [
+                                ...prev,
+                                {
+                                  id: i.id,
+                                  price: e.target.value,
+                                },
+                              ];
+                            }
+                          })
+                        }
+                      />
+                    </div>
+
+                    
+                    <div>
+                      <DescriptionIcon />
+  
+                      <textarea
+                        placeholder="Professional Description"
+                        onChange={(e) =>
+                          setProfessionalDesc((prev) => {
+                            console.log(prev);
+                            // Find the index of the item with the matching id
+                            const itemIndex = prev.findIndex(
+                              (item) => item.id === i.id
+                            );
+  
+                            // Update the price if the item exists, otherwise add a new item
+                            if (itemIndex !== -1) {
+                              // Update the price at the found index
+                              const updatedDesc = [...prev];
+                              updatedDesc[itemIndex] = {
+                                ...updatedDesc[itemIndex],
+                                description: e.target.value,
+                              };
+                              return updatedDesc;
+                            } else {
+                              // Add a new item if the item does not exist
+                              return [
+                                ...prev,
+                                {
+                                  id: i.id,
+                                  description: e.target.value,
+                                },
+                              ];
+                            }
+                          })
+                        }
+                        cols="30"
+                        rows="1"
+                      ></textarea>
+                    </div>
+                  </>
+                  )
+                }
+              })}
+
+
+
 
             <div>
               <StorageIcon />

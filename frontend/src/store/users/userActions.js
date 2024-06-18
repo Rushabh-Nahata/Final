@@ -50,6 +50,7 @@ export const register = async (dispatch, userData) => {
     dispatch(
       userActions.userRegisterSuccess({
         user: data.user,
+        loading: false,
       })
     );
   } catch (error) {

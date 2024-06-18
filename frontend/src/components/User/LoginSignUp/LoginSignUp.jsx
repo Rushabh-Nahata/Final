@@ -41,7 +41,7 @@ function LoginSignUp() {
 
   const loginSubmit = (e) => {
     e.preventDefault();
-    login(dispatch, loginEmail, loginPassword);
+      login(dispatch, loginEmail, loginPassword);
   };
 
   const registerSubmit = (e) => {
@@ -55,6 +55,7 @@ function LoginSignUp() {
     myForm.set("avatar", avatar);
 
     register(dispatch, myForm);
+    navigateTo("/verify")
 
     console.log("Register Form Submitted !");
   };
@@ -76,7 +77,7 @@ function LoginSignUp() {
     }
   };
 
-  const redirect = location.search ? location.search.split("=")[1] : "/account";
+  const redirect = location.search ? location.search.split("=")[1] : "/";
 
   useEffect(() => {
     if (error) {
@@ -127,8 +128,8 @@ function LoginSignUp() {
                   <input
                     type="email"
                     placeholder="Email"
-                      class="highlight-on-focus"
-                    required
+                    className="highlight-on-focus"
+                    required  
                     value={loginEmail}
                     onChange={(e) => setLoginEmail(e.target.value)}
                   />
@@ -138,7 +139,7 @@ function LoginSignUp() {
                   <input
                     type="password"
                     placeholder="Password"
-                      class="highlight-on-focus"
+                    className="highlight-on-focus"
                     required
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
@@ -165,7 +166,7 @@ function LoginSignUp() {
                   <input
                     type="text"
                     placeholder="Name"
-                      class="highlight-on-focus"
+                    className="highlight-on-focus"
                     required
                     name="name"
                     value={name}
@@ -179,7 +180,7 @@ function LoginSignUp() {
                     placeholder="Email"
                     required
                     name="email"
-                      class="highlight-on-focus"
+                    className="highlight-on-focus"
                     value={email}
                     onChange={registerDataChange}
                   />
@@ -191,7 +192,7 @@ function LoginSignUp() {
                     placeholder="Password"
                     required
                     name="password"
-                      class="highlight-on-focus"
+                    className="highlight-on-focus"
                     value={password}
                     onChange={registerDataChange}
                   />

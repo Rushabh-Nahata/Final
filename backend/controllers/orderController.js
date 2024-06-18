@@ -8,23 +8,24 @@ export const newOrder = async (req, res, next) => {
     const {
       shippingInfo,
       orderItems,
-      paymentInfo,
+      paymentId,
       itemsPrice,
       taxPrice,
-      shippingPrice,
+      // shippingPrice,
       totalPrice,
+      user,
     } = req.body;
 
     const order = await Order.create({
       shippingInfo,
       orderItems,
-      paymentInfo,
+      paymentId,
       itemsPrice,
       taxPrice,
-      shippingPrice,
+      // shippingPrice,
       totalPrice,
       paidAt: Date.now(),
-      user: req.user._id,
+      user: user._id,
     });
 
     res.status(201).json({
@@ -32,6 +33,7 @@ export const newOrder = async (req, res, next) => {
       order,
     });
   } catch (err) {
+    console.log(err.resposne.data);
     next(err);
   }
 };

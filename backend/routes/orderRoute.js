@@ -11,7 +11,7 @@ import { isAuthenticatedUser, authorizeRoles } from "../middleware/auth.js";
 
 const router = express.Router();
 
-router.post("/order/new", isAuthenticatedUser, newOrder);
+router.post("/order/new", newOrder);
 
 router.get("/order/:id", isAuthenticatedUser, getSingleOrder);
 router.get("/orders/me", isAuthenticatedUser, myOrders);

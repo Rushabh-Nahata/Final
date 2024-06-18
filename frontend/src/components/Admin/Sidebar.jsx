@@ -22,10 +22,11 @@ const Sidebar = () => {
         <TreeView
           defaultCollapseIcon={<ExpandMoreIcon />}
           defaultExpandIcon={<ImportExportIcon />}
+          className="custom-label-color"
         >
           <TreeItem nodeId="1" label="Products">
             <Link to="/admin/products">
-              <TreeItem nodeId="2" label="All" icon={<PostAddIcon />} />
+              <TreeItem nodeId="2" label="All" icon={<PostAddIcon />}/>
             </Link>
 
             <Link to="/admin/product">

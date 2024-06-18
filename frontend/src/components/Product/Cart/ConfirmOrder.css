@@ -22,6 +22,8 @@
 .confirmshippingAreaBox,
 .confirmCartItemsContainer {
   margin: 2vmax;
+  font-weight: 600;
+  font-size: 1.2em;
 }
 
 .confirmshippingAreaBox > div {
@@ -31,11 +33,11 @@
 
 .confirmshippingAreaBox > div > p {
   font: 400 1vmax "Roboto";
-  color: black;
+  color: rgb(255, 86, 86);
 }
 .confirmshippingAreaBox > div > span {
   margin: 0 1vmax;
-  font: 100 1vmax "Roboto";
+  font: 500 1.2vmax "Roboto";
   color: #575757;
 }
 
@@ -73,7 +75,7 @@
 }
 
 .confirmCartItemsContainer > div > span {
-  font: 100 1vmax "Roboto";
+  font: 500 1vmax "Roboto";
   color: #5e5e5e;
 }
 
@@ -93,7 +95,7 @@
 
 .orderSummary > div > div {
   display: flex;
-  font: 300 1vmax "Roboto";
+  font: 500 1vmax "Roboto";
   justify-content: space-between;
   margin: 2vmax 0;
 }

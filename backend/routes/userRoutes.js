@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  otpVerification,
   deleteUser,
   forgotPassword,
   getAllUsers,
@@ -19,6 +20,7 @@ import { isAuthenticatedUser, authorizeRoles } from "../middleware/auth.js";
 const router = express.Router();
 
 router.post("/register", registerUser);
+router.post("/otp-verification", otpVerification);
 router.post("/login", loginUser);
 
 router.get("/logout", logout);

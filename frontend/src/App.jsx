@@ -8,6 +8,7 @@ import ProductDetails from "./components/Product/ProductDetails";
 import Products from "./components/Product/Products/Products";
 import Search from "./components/Product/Search/Search";
 import LoginSignUp from "./components/User/LoginSignUp/LoginSignUp";
+import Verify from "./components/User/verify/Verify";
 import { loadUser } from "./store/users/userActions";
 import { useDispatch } from "react-redux";
 import Profile from "./components/User/Profile/Profile";
@@ -21,9 +22,7 @@ import Cart from "./components/Product/Cart/Cart";
 import Shipping from "./components/Product/Cart/Shipping";
 import ConfirmOrder from "./components/Product/Cart/ConfirmOrder";
 import axios from "axios";
-import Payment from "./components/Product/Cart/Payment";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
+import Payment from "./components/payment/Payment";
 import OrderSuccess from "./components/Product/Cart/OrderSuccess";
 import MyOrder from "./components/Order/MyOrder";
 import OrderDetails from "./components/Order/OrderDetails";
@@ -41,25 +40,8 @@ import ExtraNavbar from "./components/layout/ExtraNavbar/ExtraNavbar";
 function App() {
   const dispatch = useDispatch();
 
-  const [stripeApiKey, setStripeApiKey] = useState("");
-
-  async function getStripeApiKey() {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
-    };
-    const { data } = await axios.get(
-      "http://localhost:4000/api/v1/stripeapikey",
-      config
-    );
-    setStripeApiKey(data.stripeApiKey);
-  }
-
   useEffect(() => {
     loadUser(dispatch);
-    getStripeApiKey();
   }, [dispatch]);
 
   // window.addEventListener("contextmenu", (e) => e.preventDefault());
@@ -70,14 +52,16 @@ function App() {
         {/* <NavBar /> */}
         <ExtraNavbar />
         <NewNavBar />
-       
+
         <Routes>
           <Route exact path="/" element={<Home />} />
+          {/* <Route exact path="/rushabh" element={<Rushabh />} /> */}
           <Route exact path="/product/:id" element={<ProductDetails />} />
           <Route exact path="/products" element={<Products />} />
           <Route path="/products/:keyword" element={<Products />} />
           <Route exact path="/search" element={<Search />} />
           <Route exact path="/login" element={<LoginSignUp />} />
+          <Route exact path="/verify" element={<Verify />} />
           <Route exact path="/contact" element={<Contact />} />
           <Route exact path="/about" element={<About />} />
           <Route exact path="/newnavbar" element={<NewNavBar />} />
@@ -136,19 +120,18 @@ function App() {
             }
           />
 
-          {stripeApiKey && (
-            <Route
-              exact
-              path="/process/payment"
-              element={
-                <Elements stripe={loadStripe(stripeApiKey)}>
-                  <ProtectedRoute>
-                    <Payment />
-                  </ProtectedRoute>
-                </Elements>
-              }
-            />
-          )}
+          <Route
+            exact
+            path="/processes/payment"
+            element={
+
+              <ProtectedRoute>
+                <Payment />
+              </ProtectedRoute>
+            }
+
+
+          />
 
           {/* <ProtectedRoute exact path="/success" component={OrderSuccess} /> */}
 
@@ -219,6 +202,8 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+
 
           <Route
             exact

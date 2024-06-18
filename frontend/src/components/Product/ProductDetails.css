@@ -51,6 +51,20 @@
   align-items: center;
 }
 
+.detailsBlock-3-1 button {
+  border: none;
+  cursor: pointer;
+  color: white;
+  transition: all 0.5s;
+  background-color: tomato;
+  font: 500 0.7vmax "Roboto";
+  border-radius: 20px;
+  padding: 0.5vmax 2vmax;
+  margin: 1vmax;
+  outline: none;
+  width: 50%;
+}
+
 .detailsBlock-3-1-1 > button {
   border: none;
   background-color: rgba(0, 0, 0, 0.616);
@@ -73,18 +87,6 @@
   color: rgba(0, 0, 0, 0.74) !important;
 }
 
-.detailsBlock-3-1 > button:last-child {
-  border: none;
-  cursor: pointer;
-  color: white;
-  transition: all 0.5s;
-  background-color: tomato;
-  font: 500 0.7vmax "Roboto";
-  border-radius: 20px;
-  padding: 0.5vmax 2vmax;
-  margin: 1vmax;
-  outline: none;
-}
 .css-1eiep95 {
   width: 97%;
 }
@@ -100,4 +102,27 @@
   color: white;
   background-color: rgb(48 48 48);
   border-radius: 5px;
+}
+
+.professionalDiv {
+  display: flex;
+}
+.professionalImg {
+  width: 15%;
+  height: 15%;
+  margin: 4px;
+  cursor: pointer;
+}
+
+.proDescription {
+  width: 50%;
+}
+.proDescriptionDiv h2 {
+  margin-bottom: 10px;
+}
+
+@media (max-width: 600px) {
+  .proDescription {
+    width: 90%;
+  }
 }

@@ -20,8 +20,8 @@
     margin: auto;
     padding: 3vmax;
     justify-content: space-evenly;
-    height: 70%;
-    width: 40vh;
+    height: max-content;
+    width: 60vh;
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.267);
   }
@@ -42,6 +42,7 @@
     border-radius: 4px;
     font: 300 0.9vmax cursive;
     outline: none;
+    margin: 4px;
   }
   
   .createProductForm > div > svg {
@@ -95,6 +96,7 @@
     border-radius: 4px;
     outline: none;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.219);
+    margin: 4px;
   }
   
   #createProductBtn:hover {

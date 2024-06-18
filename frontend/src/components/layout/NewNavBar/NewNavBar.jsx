@@ -25,11 +25,11 @@ const pages = [
   { name: "Contact", path: "/contact" },
   { name: "About", path: "/about" },
 ];
-
 function NewNavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-
+  
   const { isAuthenticated, user } = useSelector((state) => state.user);
+  const { cartItems } = useSelector((state) => state.carts);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -64,7 +64,7 @@ function NewNavBar() {
               color: "black !important",
             }}
           >
-            <span>SHOPHUB</span>
+            <span>KARWADENGE</span>
           </Box>
           {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
 
@@ -172,7 +172,7 @@ function NewNavBar() {
               )}
             </Tooltip>
           </Box>
-          <Link to="/cart">
+          <Link to="/cart" className="cartLink">
             <LocalMallOutlinedIcon
               sx={{
                 marginLeft: "2.5vw",
@@ -183,6 +183,10 @@ function NewNavBar() {
                 color: "#4e4e4e",
               }}
             />
+            {
+              cartItems.length > 0 ? (<span className="cartCount">{cartItems.length}</span>):null
+            }
+            
           </Link>
           <Link to="/search">
             <SearchIcon

@@ -70,7 +70,7 @@ const ProcessOrder = () => {
             >
               <div>
                 <div className="confirmshippingArea">
-                  <Typography>Shipping Info</Typography>
+                  <Typography>Billing Address</Typography>
                   <div className="orderDetailsContainerBox">
                     <div>
                       <p>Name:</p>
@@ -99,13 +99,13 @@ const ProcessOrder = () => {
                       <p
                         className={
                           order.paymentInfo &&
-                          order.paymentInfo.status === "succeeded"
+                            order.paymentInfo.status === "succeeded"
                             ? "greenColor"
                             : "redColor"
                         }
                       >
                         {order.paymentInfo &&
-                        order.paymentInfo.status === "succeeded"
+                          order.paymentInfo.status === "succeeded"
                           ? "PAID"
                           : "NOT PAID"}
                       </p>

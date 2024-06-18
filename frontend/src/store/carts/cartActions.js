@@ -3,18 +3,21 @@ import { cartsActions } from "./cartsSlice";
 import store from "../store";
 
 // Add to Cart
-export const addItemsToCart = async (dispatch, id, quantity) => {
+export const addItemsToCart = async (dispatch, id, quantity, activeProPrice, activeProData) => {
   const { data } = await axios.get(
     `http://localhost:4000/api/v1/products/${id}`
   );
+  console.log("this is data for ", activeProData)
   dispatch(
     cartsActions.addToCart({
       item: {
         product: data.product._id,
         name: data.product.name,
-        price: data.product.price,
+        price: activeProPrice,
         image: data.product.images[0].url,
         stock: data.product.Stock,
+        proName: activeProData.name,
+        proEmail: activeProData.email,
         quantity,
       },
     })

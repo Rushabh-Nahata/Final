@@ -22,6 +22,8 @@ export const createOrder = async (dispatch, order) => {
       config
     );
 
+    console.log(data);
+
     dispatch(
       orderActions.orderSuccess({
         order: data,

@@ -30,6 +30,8 @@ export const createProduct = async (req, res, next) => {
     }
 
     req.body.images = imagesLinks;
+    req.body.professionalPrice = JSON.parse(req.body.professionalPrice);
+    req.body.professionalDesc = JSON.parse(req.body.professionalDesc);
     req.body.user = req.user.id;
 
     const product = await Product.create(req.body);
@@ -107,7 +109,7 @@ export const updateProduct = async (req, res, next) => {
 
     // Images Start Here
     let images = [];
-
+    console.log("Thisis price", req.body.professionalPrice)
     if (typeof req.body.images === "string") {
       images.push(req.body.images);
     } else {
@@ -135,6 +137,20 @@ export const updateProduct = async (req, res, next) => {
 
       req.body.images = imagesLinks;
     }
+    let priceArr = []
+    const price = JSON.parse(req.body.professionalPrice)
+
+    price.forEach(element => {
+      priceArr.push({
+        id: element.id,
+        price: parseInt(element.price)
+      })
+    });
+    req.body.professionalPrice = priceArr;
+    req.body.price = parseInt(req.body.price)
+    req.body.Stock = parseInt(req.body.Stock)
+
+    console.log(req.body)
 
     product = await Product.findByIdAndUpdate(req.params.id, req.body, {
       new: true,

@@ -15,6 +15,7 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import SideBar from "./Sidebar";
 import { useNavigate, useParams } from "react-router";
 import { adminProductActions } from "../../store/products/adminProductSlice";
+import { professional } from "../../../data/professional";
 
 const UpdateProduct = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ const UpdateProduct = () => {
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
+  const [professionalPrice, setProfessionalPrice] = useState([]);
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [Stock, setStock] = useState(0);
@@ -58,9 +60,11 @@ const UpdateProduct = () => {
       setName(product.name);
       setDescription(product.description);
       setPrice(product.price);
+      setProfessionalPrice(product.professionalPrice)
       setCategory(product.category);
       setStock(product.Stock);
       setOldImages(product.images);
+      console.log(professionalPrice)
     }
     if (error) {
       alert.error(error);
@@ -95,6 +99,7 @@ const UpdateProduct = () => {
 
     myForm.set("name", name);
     myForm.set("price", price);
+    myForm.set("professionalPrice", JSON.stringify(professionalPrice));
     myForm.set("description", description);
     myForm.set("category", category);
     myForm.set("Stock", Stock);
@@ -158,6 +163,55 @@ const UpdateProduct = () => {
                 value={price}
               />
             </div>
+
+
+            {professionalPrice &&
+              professionalPrice.map((i, index) => {
+                return(
+                  <div key={index}>
+                  <AttachMoneyIcon />
+                  <input
+                    type="number"
+                    placeholder={`${professional[index].name} price`}
+                    required
+                    min={0}
+                    value={i.price}
+                    onChange={(e) =>
+                      setProfessionalPrice((prev) => {
+                        console.log(prev)
+                        // Find the index of the item with the matching id
+                        const itemIndex = prev.findIndex(
+                          (item) => item.id === i.id
+                        );
+  
+                        // Update the price if the item exists, otherwise add a new item
+                        if (itemIndex !== -1) {
+                          // Update the price at the found index
+                          const updatedPrices = [...prev];
+                          updatedPrices[itemIndex] = {
+                            ...updatedPrices[itemIndex],
+                            price: e.target.value,
+                          };
+                          return updatedPrices;
+                        } else {
+                          // Add a new item if the item does not exist
+                          return [
+                            ...prev,
+                            {
+                              id: i.id,
+                              price: e.target.value,
+                            },
+                          ];
+                        }
+                      })
+                    }
+                  />
+                </div>
+                 )
+              })}
+
+
+
 
             <div>
               <DescriptionIcon />

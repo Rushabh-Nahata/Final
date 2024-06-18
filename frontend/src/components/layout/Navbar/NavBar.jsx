@@ -8,6 +8,8 @@ import UserOptions from "../UserOptions/UserOptions";
 
 function NavBar() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
+  const { cartItems } = useSelector((state) => state.carts);
+  console.log(cartItems)
 
   return (
     <Box
@@ -40,7 +42,7 @@ function NavBar() {
           fontFamily: "Montserrat !important",
         }}
       >
-        <span>SHOPHUB</span>
+        <span>KARWADENGE</span>
       </Box>
       <Box
         className="navbar-options-container"

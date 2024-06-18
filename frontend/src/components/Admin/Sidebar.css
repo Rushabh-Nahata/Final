@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   padding: 4rem 0;
+  
 }
 
 .sidebar > a:first-child {
@@ -18,10 +19,11 @@
 }
 .sidebar a {
   text-decoration: none;
-  color: rgba(0, 0, 0, 0.493);
+  color: rgba(0, 0, 0, 1);
   font: 200 1rem "Roboto";
   padding: 2rem;
   transition: all 0.5s;
+  font-size:x-large;
 }
 .sidebar a:hover {
   color: rgb(0, 0, 0);
@@ -39,3 +41,4 @@
 .MuiTypography-root {
   background-color: #fff !important;
 }
+

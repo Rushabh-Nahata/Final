@@ -34,6 +34,14 @@ const orderSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
+      proName: {
+        type: String,
+        required: true,
+      },
+      proEmail: {
+        type: String,
+        required: true,
+      },
       price: {
         type: Number,
         required: true,
@@ -60,19 +68,13 @@ const orderSchema = new mongoose.Schema({
     required: true,
   },
 
-  paymentInfo: {
-    id: {
-      type: String,
-      required: true,
-    },
-    status: {
-      type: String,
-      required: true,
-    },
+  paymentId: {
+    type: String,
+    required: true,
   },
   paidAt: {
     type: Date,
-    required:true,
+    required: true,
     default: Date.now(),
   },
   itemsPrice: {
@@ -87,19 +89,14 @@ const orderSchema = new mongoose.Schema({
   },
 
   shippingPrice: {
-    type: Number,
+    type: String,
     default: 0,
-    required: true,
+    required: false,
   },
   totalPrice: {
     type: Number,
     default: 0,
     required: true,
-  },
-  orderStatus: {
-    type: String,
-    required: true,
-    default: "Processing",
   },
   deliveredAt: Date,
   createdAt: {

@@ -51,7 +51,7 @@ const Shipping = () => {
 
       <div className="shippingContainer">
         <div className="shippingBox">
-          <h2 className="shippingHeading">Shipping Details</h2>
+          <h2 className="shippingHeading">Billing Address</h2>
 
           <form
             className="shippingForm"

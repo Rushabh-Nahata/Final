@@ -1,4 +1,4 @@
-import { Box, Divider, Slider, Typography } from "@mui/material";
+import { Box, Divider, Slider, Typography, styled } from "@mui/material";
 import "./Products.css";
 import { useSelector, useDispatch } from "react-redux";
 import { getProduct } from "../../../store/products/getProducts";
@@ -10,21 +10,43 @@ import { useParams } from "react-router";
 import Pagination from "react-js-pagination";
 
 const categories = [
-  "Events and Management",
-  "Membership",
-  "Bulk Orders",
-  "Travel Tourism",
   "Professional Services",
-  "Booking and Appointment",
-  "Emergency",
   "Home Services/Appliances",
-  "Financial Services/Insurance",
-  "Marketing /Sales Promotion",
-  "Daily Service / Subscription",
-  "Delivery/Pickup",
   "Gift/Hampers",
-  "Documents/Government Services"
+  "Make Website"
 ];
+
+const CustomSlider = styled(Slider)`
+  width: 90%;
+  margin-left: 5px;
+  
+  .MuiSlider-rail {
+    background-color: #ccc;
+    height: 4px;
+    border-radius: 2px;
+  }
+  
+  .MuiSlider-track {
+    background-color: #2196f3;
+    height: 4px;
+    border-radius: 2px;
+  }
+  
+  .MuiSlider-thumb {
+    width: 16px;
+    height: 16px;
+    margin-top: -6px;
+    margin-left: -8px;
+    background-color: #2196f3;
+    border: 2px solid #fff;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease-in-out;
+    
+    &:hover {
+      background-color: #0d47a1;
+    }
+  }
+`;
 
 function Products() {
   const alert = useAlert();
@@ -93,29 +115,7 @@ function Products() {
                   marginTop: "1.5vh",
                 }}
               >
-                <Typography
-                  sx={{
-                    fontWeight: "500",
-                    fontSize: "0.9rem",
-                    marginBottom: "0.5vh",
-                  }}
-                >
-                  Price
-                </Typography>
-                <Slider
-                  value={price}
-                  onChange={priceHandler}
-                  size="small"
-                  valueLabelDisplay="auto"
-                  aria-labelledby="range-slider"
-                  min={0}
-                  max={100000}
-                  sx={{
-                    color: "rgb(48 48 48)",
-                    width: "90%",
-                    marginLeft: "5px",
-                  }}
-                />
+
                 <Divider orientation="horizontal" />
               </Box>
 
@@ -169,7 +169,7 @@ function Products() {
                   Ratings above
                 </Typography>
 
-                <Slider
+                <CustomSlider
                   value={ratings}
                   onChange={(e, newRating) => {
                     setRatings(newRating);
@@ -204,19 +204,11 @@ function Products() {
                 sx={{
                   // border: "2px solid red",
                   width: "100%",
-                  height: "10vh",
+                  height: "2vh",
                   display: "flex",
                   alignItems: "center",
                 }}
               >
-                <Typography
-                  variant="span"
-                  sx={{
-                    fontWeight: "500",
-                  }}
-                >
-                  {"> "}Products
-                </Typography>
               </Box>
 
               <Box

@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import "./ConfirmOrder.css";
 import { Link, useNavigate } from "react-router-dom";
 import { Typography } from "@material-ui/core";
-
 const ConfirmOrder = () => {
   const navigateTo = useNavigate();
   const { shippingInfo, cartItems } = useSelector((state) => state.carts);
@@ -13,25 +12,25 @@ const ConfirmOrder = () => {
     0
   );
 
-  const shippingCharges = subtotal > 1000 ? 0 : 200;
+  const shippingCharges = subtotal > 1000 ? "Free" : "Free";
 
-  const tax = subtotal * 0.18;
 
-  const totalPrice = subtotal + tax + shippingCharges;
+  const totalPrice = subtotal;
 
   const address = `${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.state}, ${shippingInfo.pinCode}, ${shippingInfo.country}`;
 
-  const proceedToPayment = () => {
+  const proceedToPayment = async () => {
+
+
     const data = {
       subtotal,
       shippingCharges,
-      tax,
       totalPrice,
     };
 
     sessionStorage.setItem("orderInfo", JSON.stringify(data));
 
-    navigateTo("/process/payment");
+    navigateTo("/processes/payment");
   };
 
   return (
@@ -39,7 +38,7 @@ const ConfirmOrder = () => {
       <div className="confirmOrderPage">
         <div>
           <div className="confirmshippingArea">
-            <Typography>Shipping Info</Typography>
+            <Typography>Billing Address</Typography>
             <div className="confirmshippingAreaBox">
               <div>
                 <p>Name:</p>
@@ -87,10 +86,6 @@ const ConfirmOrder = () => {
                 <p>Shipping Charges:</p>
                 <span>₹{shippingCharges}</span>
               </div>
-              <div>
-                <p>GST:</p>
-                <span>₹{tax}</span>
-              </div>
             </div>
 
             <div className="orderSummaryTotal">
@@ -100,7 +95,9 @@ const ConfirmOrder = () => {
               <span>₹{totalPrice}</span>
             </div>
 
-            <button onClick={proceedToPayment}>Proceed To Payment</button>
+            <button onClick={proceedToPayment}>
+              Procceed with: {totalPrice}
+            </button>
           </div>
         </div>
       </div>

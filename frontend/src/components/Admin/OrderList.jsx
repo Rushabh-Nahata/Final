@@ -68,6 +68,8 @@ const OrderList = () => {
               <tr>
                 <th>Order ID</th>
                 <th>Status</th>
+                <th>Professional Name</th>
+                <th>Professional Email</th>
                 <th>Items Qty</th>
                 <th>Amount</th>
                 <th>Actions</th>
@@ -79,6 +81,26 @@ const OrderList = () => {
                 <tr key={item._id}>
                   <td>{item._id}</td>
                   <td>{item.orderStatus}</td>
+                  <td>
+                    {
+                      item.orderItems.map((i, idx) => (
+                        <div>
+                          {i.proName}
+                        </div>
+                      ))
+                    }
+
+                  </td>
+                  <td>
+                    {
+                      item.orderItems.map((i, idx) => (
+                        <div>
+                          {i.proEmail}
+                        </div>
+                      ))
+                    }
+
+                  </td>
                   <td>{item.orderItems.length}</td>
                   <td>
                     {" "}

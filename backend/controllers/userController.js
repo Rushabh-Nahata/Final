@@ -5,6 +5,8 @@ import sendToken from "../utils/jwtToken.js";
 import sendEmail from "../utils/sendEmail.js";
 import crypto from "crypto";
 import cloudinary from "cloudinary";
+import TempUser from "../models/tempUserModel.js";
+import otpGenerator from "otp-generator";
 
 //Register our user
 export const registerUser = async (req, res, next) => {
@@ -15,7 +17,12 @@ export const registerUser = async (req, res, next) => {
       crop: "scale",
     });
     const { name, email, password } = req.body;
-
+    const otp = otpGenerator.generate(6, {
+      upperCaseAlphabets: false,
+      specialChars: false,
+      lowerCaseAlphabets: false,
+      digits: true,
+    });
     //Creating a user
     const user = await User.create({
       name,
@@ -27,9 +34,39 @@ export const registerUser = async (req, res, next) => {
       },
     });
 
+    await TempUser.create({
+      userId: user.id,
+      otp,
+    });
+    const message = `To activate your account, please verify your email by entering the OTP provided below on our website. \n OTP: ${otp}`;
+    await sendEmail({
+      email: user.email,
+      subject: `Karwadenge email verification`,
+      message,
+    });
+    //This token is create in user model
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+};
+
+export const otpVerification = async (req, res, next) => {
+  try {
+    const { otp } = req.body;
+
+    //Creating a user
+    const tempUser = await TempUser.findOne({ otp });
+    const user = await User.findById(tempUser.userId);
+
+    if (user) {
+      await User.findByIdAndUpdate(user.id, { isVerified: true });
+      await TempUser.findByIdAndDelete(tempUser.id);
+    }
     //This token is create in user model
     sendToken(user, 201, res);
   } catch (err) {
+    console.log(err);
     next(err);
   }
 };
@@ -53,6 +90,11 @@ export const loginUser = async (req, res, next) => {
     if (!user) {
       return next(new ErrorHandler("Invalid email or password", 401));
     }
+    if (user.isVerified === false) {
+      return next(
+        new ErrorHandler("Your email is not verified for login!", 409)
+      );
+    }
 
     //Check if password matched or not
     const isPasswordMatched = await user.comparePassword(password);
@@ -63,7 +105,7 @@ export const loginUser = async (req, res, next) => {
 
     //If matches then send the token
     sendToken(user, 200, res);
-    console.dir("here" ,req.cookies.name);
+    console.dir("here", req.cookies.name);
   } catch (err) {
     next(err.stack);
   }
@@ -108,7 +150,7 @@ export const forgotPassword = async (req, res, next) => {
     try {
       await sendEmail({
         email: user.email,
-        subject: `ShopHub Password Recovery`,
+        subject: `Karwadenge Password Recovery`,
         message,
       });
 
