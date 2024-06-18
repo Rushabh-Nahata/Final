@@ -19,8 +19,6 @@
     "@mui/x-data-grid": "^6.9.0",
     "@mui/x-tree-view": "^7.7.0",
     "@reduxjs/toolkit": "^1.9.5",
-    "@stripe/react-stripe-js": "^2.1.1",
-    "@stripe/stripe-js": "^2.1.9",
     "axios": "^1.5.1",
     "chart.js": "^4.3.0",
     "country-state-city": "^3.1.4",
