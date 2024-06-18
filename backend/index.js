@@ -26,7 +26,7 @@ dotenv.config({ path: "./config/config.env" });
 const app = express();
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://karwadenge-client.onrender.com",
     credentials: true,
   })
 );
