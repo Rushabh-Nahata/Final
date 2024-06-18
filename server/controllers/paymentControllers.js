@@ -1,5 +1,4 @@
-import Stripe from "stripe";
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY); // Import the function
+
 
 import Razorpay from "razorpay";
 
@@ -34,53 +33,5 @@ export const processPayment = async (req, res) => {
     res.json(order);
   } catch (error) {
     res.status(500).json({ message: error.message });
-  }
-};
-
-export const processPayment_stripe = async (req, res, next) => {
-  try {
-    const { orderItems } = req.body;
-    // console.log(orderItems)
-    // const paymentResult = { message: "Payment successful" };
-    const lineItems = orderItems.map((product) => ({
-      price_data: {
-        currency: "inr",
-        product_data: {
-          name: product.name,
-          images: product.image,
-        },
-        unit_amount: Math.round(product.price * 100),
-      },
-      quantity: product.quantity,
-    }));
-
-    // Debugging: Log the final lineItems array
-    console.log("Final lineItems array:", lineItems);
-
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      line_items: [
-        {
-          price_data: {
-            currency: "inr",
-            product_data: {
-              name: orderItems[0].name,
-            },
-            unit_amount: Math.round(orderItems[0].price * 100),
-          },
-          quantity: orderItems[0].quantity,
-        },
-      ],
-      success_url: "http://localhost:5173/success",
-      mode: "payment",
-    });
-
-    // Respond with success
-    console.log("Payment done successfully");
-    res.status(200).json({ session, success: true });
-  } catch (error) {
-    // If an error occurs during payment processing, handle it here
-    console.error("Payment processing error:", error);
-    res.status(500).json({ success: false, error: "Payment processing error" });
   }
 };

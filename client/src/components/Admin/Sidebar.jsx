@@ -1,6 +1,9 @@
 import "./Sidebar.css";
 import { Link } from "react-router-dom";
-import { TreeView, TreeItem } from "@material-ui/lab";
+// import { TreeView, TreeItem } from "@mui/lab";
+// import { TreeView, TreeItem } from '@mui/lab';
+import { TreeItem } from '@mui/x-tree-view/TreeItem';
+import { TreeView } from '@mui/x-tree-view/TreeView';
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import PostAddIcon from "@mui/icons-material/PostAdd";
@@ -26,7 +29,7 @@ const Sidebar = () => {
         >
           <TreeItem nodeId="1" label="Products">
             <Link to="/admin/products">
-              <TreeItem nodeId="2" label="All" icon={<PostAddIcon />}/>
+              <TreeItem nodeId="2" label="All" icon={<PostAddIcon />} />
             </Link>
 
             <Link to="/admin/product">
