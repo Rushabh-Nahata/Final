@@ -3,7 +3,7 @@ import "./newProduct.css";
 import { useSelector, useDispatch } from "react-redux";
 import { clearErrors, createProduct } from "../../store/products/getProducts";
 import { useAlert } from "react-alert";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import DescriptionIcon from "@mui/icons-material/Description";
@@ -137,7 +137,7 @@ const NewProduct = () => {
                 rows="1"
               ></textarea>
             </div>
-            
+
 
 
 
@@ -157,88 +157,88 @@ const NewProduct = () => {
 
             {professional &&
               professional.map((i, index) => {
-                if(i.category === category){
-                  return(
+                if (i.category === category) {
+                  return (
                     <>
-                    <div key={index}>
-                      <AttachMoneyIcon />
-                      <input
-                        type="number"
-                        placeholder={`${i.name} price`}
-                        required
-                        min={0}
-                        onChange={(e) =>
-                          setProfessionalPrice((prev) => {
-                            console.log(prev);
-                            // Find the index of the item with the matching id
-                            const itemIndex = prev.findIndex(
-                              (item) => item.id === i.id
-                            );
-  
-                            // Update the price if the item exists, otherwise add a new item
-                            if (itemIndex !== -1) {
-                              // Update the price at the found index
-                              const updatedPrices = [...prev];
-                              updatedPrices[itemIndex] = {
-                                ...updatedPrices[itemIndex],
-                                price: e.target.value,
-                              };
-                              return updatedPrices;
-                            } else {
-                              // Add a new item if the item does not exist
-                              return [
-                                ...prev,
-                                {
-                                  id: i.id,
-                                  price: e.target.value,
-                                },
-                              ];
-                            }
-                          })
-                        }
-                      />
-                    </div>
+                      <div key={index}>
+                        <AttachMoneyIcon />
+                        <input
+                          type="number"
+                          placeholder={`${i.name} price`}
+                          required
+                          min={0}
+                          onChange={(e) =>
+                            setProfessionalPrice((prev) => {
+                              console.log(prev);
+                              // Find the index of the item with the matching id
+                              const itemIndex = prev.findIndex(
+                                (item) => item.id === i.id
+                              );
 
-                    
-                    <div>
-                      <DescriptionIcon />
-  
-                      <textarea
-                        placeholder="Professional Description"
-                        onChange={(e) =>
-                          setProfessionalDesc((prev) => {
-                            console.log(prev);
-                            // Find the index of the item with the matching id
-                            const itemIndex = prev.findIndex(
-                              (item) => item.id === i.id
-                            );
-  
-                            // Update the price if the item exists, otherwise add a new item
-                            if (itemIndex !== -1) {
-                              // Update the price at the found index
-                              const updatedDesc = [...prev];
-                              updatedDesc[itemIndex] = {
-                                ...updatedDesc[itemIndex],
-                                description: e.target.value,
-                              };
-                              return updatedDesc;
-                            } else {
-                              // Add a new item if the item does not exist
-                              return [
-                                ...prev,
-                                {
-                                  id: i.id,
+                              // Update the price if the item exists, otherwise add a new item
+                              if (itemIndex !== -1) {
+                                // Update the price at the found index
+                                const updatedPrices = [...prev];
+                                updatedPrices[itemIndex] = {
+                                  ...updatedPrices[itemIndex],
+                                  price: e.target.value,
+                                };
+                                return updatedPrices;
+                              } else {
+                                // Add a new item if the item does not exist
+                                return [
+                                  ...prev,
+                                  {
+                                    id: i.id,
+                                    price: e.target.value,
+                                  },
+                                ];
+                              }
+                            })
+                          }
+                        />
+                      </div>
+
+
+                      <div>
+                        <DescriptionIcon />
+
+                        <textarea
+                          placeholder="Professional Description"
+                          onChange={(e) =>
+                            setProfessionalDesc((prev) => {
+                              console.log(prev);
+                              // Find the index of the item with the matching id
+                              const itemIndex = prev.findIndex(
+                                (item) => item.id === i.id
+                              );
+
+                              // Update the price if the item exists, otherwise add a new item
+                              if (itemIndex !== -1) {
+                                // Update the price at the found index
+                                const updatedDesc = [...prev];
+                                updatedDesc[itemIndex] = {
+                                  ...updatedDesc[itemIndex],
                                   description: e.target.value,
-                                },
-                              ];
-                            }
-                          })
-                        }
-                        cols="30"
-                        rows="1"
-                      ></textarea>
-                    </div>
-                  </>
+                                };
+                                return updatedDesc;
+                              } else {
+                                // Add a new item if the item does not exist
+                                return [
+                                  ...prev,
+                                  {
+                                    id: i.id,
+                                    description: e.target.value,
+                                  },
+                                ];
+                              }
+                            })
+                          }
+                          cols="30"
+                          rows="1"
+                        ></textarea>
+                      </div>
+                    </>
                   )
                 }
               })}

@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import "./ConfirmOrder.css";
 import { Link, useNavigate } from "react-router-dom";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 const ConfirmOrder = () => {
   const navigateTo = useNavigate();
   const { shippingInfo, cartItems } = useSelector((state) => state.carts);

@@ -1,5 +1,5 @@
 import "./About.css";
-import { Typography, Avatar } from "@material-ui/core";
+import { Typography, Avatar } from "@mui/material";
 // import home from "../../../src/assets/Homephoto.png"../src/
 import Aadesh from "../../assets/aadesh.jpg"
 import Comfort from "../../../src/assets/Homephoto.png"

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import "./OrderDetails.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import { getOrderDetails, clearErrors } from "../../store/orders/orderAction";
 import Loader from "../../components/layout/Loader/Loader";
 import { useAlert } from "react-alert";
@@ -60,13 +60,13 @@ const OrderDetails = () => {
                   <p
                     className={
                       order.paymentInfo &&
-                      order.paymentInfo.status === "succeeded"
+                        order.paymentInfo.status === "succeeded"
                         ? "greenColor"
                         : "redColor"
                     }
                   >
                     {order.paymentInfo &&
-                    order.paymentInfo.status === "succeeded"
+                      order.paymentInfo.status === "succeeded"
                       ? "PAID"
                       : "NOT PAID"}
                   </p>

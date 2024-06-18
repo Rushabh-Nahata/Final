@@ -5,7 +5,7 @@ import {
   addItemsToCart,
   removeItemsFromCart,
 } from "../../../store/carts/cartActions";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -28,13 +28,13 @@ const Cart = () => {
     if (1 >= quantity) {
       return;
     }
-    addItemsToCart(dispatch,id, newQty);
+    addItemsToCart(dispatch, id, newQty);
   };
 
   const deleteCartItems = (id) => {
     removeItemsFromCart(dispatch, id);
   };
- 
+
 
   const checkoutHandler = () => {
     navigateTo("/login?redirect=/shipping");
@@ -83,12 +83,11 @@ const Cart = () => {
                       +
                     </button>
                   </div>
-                  <p className="cartSubtotal">{`₹${
-                    item.price * item.quantity
-                  }`}</p>
+                  <p className="cartSubtotal">{`₹${item.price * item.quantity
+                    }`}</p>
                 </div>
               ))}
-              {/* <Divider/> */}
+            {/* <Divider/> */}
 
             <div className="cartGrossProfit">
               <div></div>

@@ -6,7 +6,7 @@ import {
   getProductDetail,
 } from "../../store/products/getProducts";
 import { useAlert } from "react-alert";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import DescriptionIcon from "@mui/icons-material/Description";
 import StorageIcon from "@mui/icons-material/Storage";
@@ -167,47 +167,47 @@ const UpdateProduct = () => {
 
             {professionalPrice &&
               professionalPrice.map((i, index) => {
-                return(
+                return (
                   <div key={index}>
-                  <AttachMoneyIcon />
-                  <input
-                    type="number"
-                    placeholder={`${professional[index].name} price`}
-                    required
-                    min={0}
-                    value={i.price}
-                    onChange={(e) =>
-                      setProfessionalPrice((prev) => {
-                        console.log(prev)
-                        // Find the index of the item with the matching id
-                        const itemIndex = prev.findIndex(
-                          (item) => item.id === i.id
-                        );
-  
-                        // Update the price if the item exists, otherwise add a new item
-                        if (itemIndex !== -1) {
-                          // Update the price at the found index
-                          const updatedPrices = [...prev];
-                          updatedPrices[itemIndex] = {
-                            ...updatedPrices[itemIndex],
-                            price: e.target.value,
-                          };
-                          return updatedPrices;
-                        } else {
-                          // Add a new item if the item does not exist
-                          return [
-                            ...prev,
-                            {
-                              id: i.id,
+                    <AttachMoneyIcon />
+                    <input
+                      type="number"
+                      placeholder={`${professional[index].name} price`}
+                      required
+                      min={0}
+                      value={i.price}
+                      onChange={(e) =>
+                        setProfessionalPrice((prev) => {
+                          console.log(prev)
+                          // Find the index of the item with the matching id
+                          const itemIndex = prev.findIndex(
+                            (item) => item.id === i.id
+                          );
+
+                          // Update the price if the item exists, otherwise add a new item
+                          if (itemIndex !== -1) {
+                            // Update the price at the found index
+                            const updatedPrices = [...prev];
+                            updatedPrices[itemIndex] = {
+                              ...updatedPrices[itemIndex],
                               price: e.target.value,
-                            },
-                          ];
-                        }
-                      })
-                    }
-                  />
-                </div>
-                 )
+                            };
+                            return updatedPrices;
+                          } else {
+                            // Add a new item if the item does not exist
+                            return [
+                              ...prev,
+                              {
+                                id: i.id,
+                                price: e.target.value,
+                              },
+                            ];
+                          }
+                        })
+                      }
+                    />
+                  </div>
+                )
               })}
 
 
